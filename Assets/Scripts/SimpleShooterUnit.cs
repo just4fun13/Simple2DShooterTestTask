@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Threading.Tasks;
 
 namespace Assets.Scripts
 {
@@ -12,7 +13,7 @@ namespace Assets.Scripts
 
         public void Shot()
         {
-            Instantiate(bulletPrefab, transform.position + transform.up * unitRadius, transform.rotation);
+            Instantiate(bulletPrefab, transform.position + transform.right * unitRadius, transform.rotation);
         }
 
         public void Rotate(float rotationInput)
@@ -22,8 +23,7 @@ namespace Assets.Scripts
 
         public void MoveForward(float moveInput)
         {
-//            transform.position += (
-          rb.velocity = (Vector2) transform.up * moveInput * maxSpeed ;
+          rb.velocity = (Vector2) transform.right * moveInput * maxSpeed ;
         }
 
     }
