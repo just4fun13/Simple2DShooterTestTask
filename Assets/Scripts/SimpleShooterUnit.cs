@@ -6,7 +6,7 @@ namespace Assets.Scripts
     public class SimpleShooterUnit : MonoBehaviour
     {
         [SerializeField] private GameObject bulletPrefab;
-        [SerializeField] private Rigidbody2D rb;
+        [SerializeField] public Rigidbody2D rb ;
         [SerializeField] private float maxRotAngle = 180f;
         [SerializeField] private float maxSpeed = 10f;
         private float unitRadius = 1.3f;

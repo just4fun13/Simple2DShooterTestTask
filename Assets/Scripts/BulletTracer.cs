@@ -15,10 +15,16 @@ namespace Assets.Scripts
                 Destroy(gameObject, bulletLifetime);
         }
 
-        private void OnTriggerEnter2D(Collider2D col)
+        private void OnCollisionEnter2D(Collision2D col)
         {
-            Debug.Log($"Collided with {col.gameObject.name}");
-//            Destroy(gameObject);
+            if (!col.gameObject.CompareTag("Ground"))
+            {
+                if (col.gameObject.CompareTag("Enemy"))
+                    GameManager.PlayerWin();
+                else
+                    GameManager.EnemyWin();
+                Destroy(gameObject);
+            }
         }
 
     }

@@ -1,16 +1,31 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Pathfinding;
 
 namespace Assets.Scripts
 {
     public class SimpleUnitWithAutoMotions : SimpleShooterUnit
     {
-        [SerializeField] private float shotCd = 0.8f;
+        [SerializeField] private float shotCd = 0.5f;
+        [SerializeField] public  AIPath aIdestinationSetter;
         private float angleEqualParameter = 0.99f;
         public bool Busy { get; private set; } = false;
 
         public bool shot = false;
         public bool rotating = false;
+
+        private bool moving;
+
+        public bool Move
+        {
+            get { return moving; }
+            set 
+            { 
+                moving = value;
+                aIdestinationSetter.enabled = moving;
+            }
+        }
+
         private void Start()
         {
             StartCoroutine(ShotContinuous());
@@ -36,9 +51,9 @@ namespace Assets.Scripts
             rotating = true;
             Vector2 direction = dir.normalized;
             Quaternion myInitRotation = transform.rotation;
-            Quaternion desiredRotation = Quaternion.Euler(0f, 0f, Mathf.Atan2(direction.y, direction.x));
+            Quaternion desiredRotation = Quaternion.Euler(0f, 0f, Mathf.Rad2Deg * Mathf.Atan2(direction.y, direction.x));
             float t = 0f;
-            while (Vector2.Dot(transform.right, direction) < angleEqualParameter)
+            while (t < 1f)
             {
                 t += Time.deltaTime;
                 if (!rotating) break;

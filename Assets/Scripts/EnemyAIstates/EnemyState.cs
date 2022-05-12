@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Assets.Scripts.EnemyAIstates
 {
     public abstract class EnemyState
     {
-        public virtual void EnterState()
+        protected EnemyStateMachine context;
+        protected SimpleUnitWithAutoMotions unit => context.unit;
+        public virtual void EnterState(EnemyStateMachine enemyStateMachine)
         {
-
+            context = enemyStateMachine;
         }
          
         public virtual void ExitState()
